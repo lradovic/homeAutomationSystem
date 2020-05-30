@@ -15,6 +15,16 @@ public class User {
     private String password;
     @ManyToMany
     private Set<Device> devices;
+    @OneToMany(mappedBy = "user")
+    private Set<Rule> rules;
+
+    public Set<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(Set<Rule> rules) {
+        this.rules = rules;
+    }
 
     public Long getId() {
         return id;

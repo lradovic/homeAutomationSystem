@@ -16,6 +16,16 @@ public class Actuator {
     private Device device;
     @ManyToMany(mappedBy = "actuators")
     private Set<Rule> rules;
+    @OneToMany(mappedBy = "actuator")
+    private Set<Action> actions;
+
+    public Set<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(Set<Action> actions) {
+        this.actions = actions;
+    }
 
     public Set<Rule> getRules() {
         return rules;

@@ -1,31 +1,18 @@
 package com.example.homeAutomation.model;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
-public class Rule {
+public class Action {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String description;
-    @ManyToMany
-    private Set<Sensor> sensors;
-    @ManyToMany
-    private Set<Actuator> actuators;
     @ManyToOne
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    private Actuator actuator;
 
     public Long getId() {
         return id;
@@ -51,19 +38,11 @@ public class Rule {
         this.description = description;
     }
 
-    public Set<Sensor> getSensors() {
-        return sensors;
+    public Actuator getActuator() {
+        return actuator;
     }
 
-    public void setSensors(Set<Sensor> sensors) {
-        this.sensors = sensors;
-    }
-
-    public Set<Actuator> getActuators() {
-        return actuators;
-    }
-
-    public void setActuators(Set<Actuator> actuators) {
-        this.actuators = actuators;
+    public void setActuator(Actuator actuator) {
+        this.actuator = actuator;
     }
 }
