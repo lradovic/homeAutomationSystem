@@ -1,5 +1,6 @@
 package com.example.homeAutomation.controller;
 
+import com.example.homeAutomation.dto.DeviceDto;
 import com.example.homeAutomation.model.Device;
 import com.example.homeAutomation.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ class DeviceController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public void create(@RequestBody Device data) {
+    public void create(@RequestBody DeviceDto data) {
         deviceService.create(data);
     }
 

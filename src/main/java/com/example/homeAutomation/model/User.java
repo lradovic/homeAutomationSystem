@@ -73,4 +73,17 @@ public class User {
     public void setDevices(Set<Device> devices) {
         this.devices = devices;
     }
+
+    public User(String firstName, String lastName, String email, String password, Set<Device> devices, Set<Rule> rules) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.devices = devices;
+        this.rules = rules;
+    }
+
+    public User() {
+
+    }
 }

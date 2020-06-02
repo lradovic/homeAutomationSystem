@@ -1,9 +1,12 @@
 package com.example.homeAutomation.service;
 
+import com.example.homeAutomation.dto.DeviceDto;
 import com.example.homeAutomation.model.Device;
+import com.example.homeAutomation.model.User;
 import com.example.homeAutomation.repository.ActuatorRepository;
 import com.example.homeAutomation.repository.DeviceRepository;
 import com.example.homeAutomation.repository.SensorRepository;
+import com.example.homeAutomation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +24,16 @@ public class DeviceService {
 
     private final ActuatorRepository actuatorRepository;
 
+    private final UserRepository userRepository;
+
     @Autowired
     public DeviceService(DeviceRepository deviceRepository,
                          SensorRepository sensorRepository,
-                         ActuatorRepository actuatorRepository) {
+                         ActuatorRepository actuatorRepository, UserRepository userRepository) {
         this.deviceRepository = deviceRepository;
         this.sensorRepository = sensorRepository;
         this.actuatorRepository = actuatorRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Device> readAll() {
@@ -38,8 +44,17 @@ public class DeviceService {
         return deviceRepository.findById(id);
     }
 
-    public void create(Device data) {
-        deviceRepository.save(data);
+    public void create(DeviceDto data) {
+
+        User user = userRepository.findById(data.getUserId()).get();
+        Device device = new Device();
+        device.setId(data.getId());
+        device.setName(data.getName());
+        device.setDescription(data.getDescription());
+        device.setVersionTimestamp(data.getVersionTimestamp());
+        
+
+        //deviceRepository.save(data);
     }
 
     public void update(long id, Device data) {

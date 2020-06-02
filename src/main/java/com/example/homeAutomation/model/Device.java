@@ -1,6 +1,7 @@
 package com.example.homeAutomation.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,14 +17,23 @@ public class Device {
     @OneToMany(mappedBy = "device")
     private Set<Actuator> actuators;
     @ManyToMany(mappedBy = "devices")
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
+    private Long versionTimestamp;
 
-    public Set<User> getUser() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUser(Set<User> user) {
-        this.users = user;
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Long getVersionTimestamp() {
+        return versionTimestamp;
+    }
+
+    public void setVersionTimestamp(Long versionTimestamp) {
+        this.versionTimestamp = versionTimestamp;
     }
 
     public Long getId() {
