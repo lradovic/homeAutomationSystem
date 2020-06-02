@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.Entity;
 
 @Repository
-public interface RuleRepository extends JpaRepository<Rule,Long> {
+public interface RuleRepository extends JpaRepository<Rule, Long> {
 }

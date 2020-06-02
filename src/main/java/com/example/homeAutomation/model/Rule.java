@@ -1,7 +1,9 @@
 package com.example.homeAutomation.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,9 +15,9 @@ public class Rule {
     private String name;
     private String description;
     @ManyToMany
-    private Set<Sensor> sensors;
+    private List<Sensor> sensors = new ArrayList<>();
     @ManyToMany
-    private Set<Actuator> actuators;
+    private List<Actuator> actuators = new ArrayList<>();
     @ManyToOne
     private User user;
 
@@ -51,19 +53,19 @@ public class Rule {
         this.description = description;
     }
 
-    public Set<Sensor> getSensors() {
+    public List<Sensor> getSensors() {
         return sensors;
     }
 
-    public void setSensors(Set<Sensor> sensors) {
+    public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
 
-    public Set<Actuator> getActuators() {
+    public List<Actuator> getActuators() {
         return actuators;
     }
 
-    public void setActuators(Set<Actuator> actuators) {
+    public void setActuators(List<Actuator> actuators) {
         this.actuators = actuators;
     }
 }

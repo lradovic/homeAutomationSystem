@@ -5,6 +5,7 @@ import com.example.homeAutomation.model.Device;
 import com.example.homeAutomation.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,10 +35,9 @@ class DeviceController {
         return deviceService.read(id).orElseThrow(IllegalArgumentException::new);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    public void create(@RequestBody DeviceDto data) {
+    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public void create(DeviceDto data) {
         deviceService.create(data);
     }
 

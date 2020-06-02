@@ -1,6 +1,8 @@
 package com.example.homeAutomation.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,18 +15,10 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    @ManyToMany
-    private Set<Device> devices;
+    @ManyToMany(mappedBy = "users")
+    private List<Device> devices = new ArrayList<>();
     @OneToMany(mappedBy = "user")
-    private Set<Rule> rules;
-
-    public Set<Rule> getRules() {
-        return rules;
-    }
-
-    public void setRules(Set<Rule> rules) {
-        this.rules = rules;
-    }
+    private List<Rule> rules = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -66,15 +60,23 @@ public class User {
         this.password = password;
     }
 
-    public Set<Device> getDevices() {
+    public List<Device> getDevices() {
         return devices;
     }
 
-    public void setDevices(Set<Device> devices) {
+    public void setDevices(List<Device> devices) {
         this.devices = devices;
     }
 
-    public User(String firstName, String lastName, String email, String password, Set<Device> devices, Set<Rule> rules) {
+    public List<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(List<Rule> rules) {
+        this.rules = rules;
+    }
+
+    public User(String firstName, String lastName, String email, String password, List<Device> devices, List<Rule> rules) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

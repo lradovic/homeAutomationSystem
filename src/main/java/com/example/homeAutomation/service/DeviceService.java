@@ -10,6 +10,7 @@ import com.example.homeAutomation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,15 +47,18 @@ public class DeviceService {
 
     public void create(DeviceDto data) {
 
-        User user = userRepository.findById(data.getUserId()).get();
         Device device = new Device();
         device.setId(data.getId());
         device.setName(data.getName());
         device.setDescription(data.getDescription());
         device.setVersionTimestamp(data.getVersionTimestamp());
-        
 
-        //deviceRepository.save(data);
+        User user = userRepository.findById(data.getUserId()).get();
+        user.getDevices().add(device);
+        device.getUsers().add(user);
+
+
+        deviceRepository.saveAndFlush(device);
     }
 
     public void update(long id, Device data) {

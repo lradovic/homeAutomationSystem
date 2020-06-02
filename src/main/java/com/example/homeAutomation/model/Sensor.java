@@ -1,7 +1,9 @@
 package com.example.homeAutomation.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,13 +19,13 @@ public class Sensor {
     @ManyToOne
     private Device device;
     @ManyToMany(mappedBy = "sensors")
-    private Set<Rule> rules;
+    private List<Rule> rules = new ArrayList<>();
 
-    public Set<Rule> getRules() {
+    public List<Rule> getRules() {
         return rules;
     }
 
-    public void setRules(Set<Rule> rules) {
+    public void setRules(List<Rule> rules) {
         this.rules = rules;
     }
 

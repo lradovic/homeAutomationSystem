@@ -20,8 +20,11 @@ public class HomeAutomationApplication {
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void init() {
-		User user = new User("Rix", "Ziks", "nomonom@nom.com", "test", null, null);
-		userRepository.save(user);
+		if(userRepository.findAll().isEmpty()) {
+			User user = new User("Rix", "Ziks", "nomonom@nom.com", "test", null, null);
+			userRepository.save(user);
+		}
+
 	}
 
 }

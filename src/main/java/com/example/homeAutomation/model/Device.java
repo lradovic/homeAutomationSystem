@@ -1,7 +1,9 @@
 package com.example.homeAutomation.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,28 +15,12 @@ public class Device {
     private String name;
     private String description;
     @OneToMany(mappedBy = "device")
-    private Set<Sensor> sensors;
+    private List<Sensor> sensors = new ArrayList<>();
     @OneToMany(mappedBy = "device")
-    private Set<Actuator> actuators;
-    @ManyToMany(mappedBy = "devices")
-    private Set<User> users = new HashSet<>();
+    private List<Actuator> actuators = new ArrayList<>();
+    @ManyToMany
+    private List<User> users = new ArrayList<>();
     private Long versionTimestamp;
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Long getVersionTimestamp() {
-        return versionTimestamp;
-    }
-
-    public void setVersionTimestamp(Long versionTimestamp) {
-        this.versionTimestamp = versionTimestamp;
-    }
 
     public Long getId() {
         return id;
@@ -60,21 +46,35 @@ public class Device {
         this.description = description;
     }
 
-    public Set<Sensor> getSensors() {
+    public List<Sensor> getSensors() {
         return sensors;
     }
 
-    public void setSensors(Set<Sensor> sensors) {
+    public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
 
-    public Set<Actuator> getActuators() {
+    public List<Actuator> getActuators() {
         return actuators;
     }
 
-    public void setActuators(Set<Actuator> actuators) {
+    public void setActuators(List<Actuator> actuators) {
         this.actuators = actuators;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
 
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public Long getVersionTimestamp() {
+        return versionTimestamp;
+    }
+
+    public void setVersionTimestamp(Long versionTimestamp) {
+        this.versionTimestamp = versionTimestamp;
+    }
 }

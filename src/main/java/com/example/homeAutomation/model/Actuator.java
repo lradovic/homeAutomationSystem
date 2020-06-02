@@ -1,6 +1,8 @@
 package com.example.homeAutomation.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,24 +17,24 @@ public class Actuator {
     @ManyToOne
     private Device device;
     @ManyToMany(mappedBy = "actuators")
-    private Set<Rule> rules;
+    private List<Rule> rules = new ArrayList<>();
     @OneToMany(mappedBy = "actuator")
-    private Set<Action> actions;
+    private List<Action> actions  = new ArrayList<>();
 
-    public Set<Action> getActions() {
-        return actions;
-    }
-
-    public void setActions(Set<Action> actions) {
-        this.actions = actions;
-    }
-
-    public Set<Rule> getRules() {
+    public List<Rule> getRules() {
         return rules;
     }
 
-    public void setRules(Set<Rule> rules) {
+    public void setRules(List<Rule> rules) {
         this.rules = rules;
+    }
+
+    public List<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<Action> actions) {
+        this.actions = actions;
     }
 
     public Long getId() {
