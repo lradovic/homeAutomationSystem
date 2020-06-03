@@ -9,14 +9,14 @@ import java.util.Set;
 public class Actuator {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String reference;
     private String value;
     private String description;
     @ManyToOne
     private Device device;
-    @ManyToMany(mappedBy = "actuators")
+    @ManyToMany(mappedBy = "actuators", fetch = FetchType.EAGER)
     private List<Rule> rules = new ArrayList<>();
     @OneToMany(mappedBy = "actuator")
     private List<Action> actions  = new ArrayList<>();

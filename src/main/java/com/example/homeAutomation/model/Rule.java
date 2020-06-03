@@ -10,7 +10,7 @@ import java.util.Set;
 public class Rule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
@@ -18,7 +18,8 @@ public class Rule {
     private List<Sensor> sensors = new ArrayList<>();
     @ManyToMany
     private List<Actuator> actuators = new ArrayList<>();
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     public User getUser() {

@@ -1,12 +1,15 @@
 package com.example.homeAutomation;
 
+import com.example.homeAutomation.model.Actuator;
+import com.example.homeAutomation.model.Device;
+import com.example.homeAutomation.model.Sensor;
 import com.example.homeAutomation.model.User;
-import com.example.homeAutomation.repository.UserRepository;
+import com.example.homeAutomation.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
 
 @SpringBootApplication
 public class HomeAutomationApplication {
@@ -14,16 +17,23 @@ public class HomeAutomationApplication {
 	@Autowired
 	UserRepository userRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(HomeAutomationApplication.class, args);
-	}
+	@Autowired
+	DeviceRepository deviceRepository;
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void init() {
-		if(userRepository.findAll().isEmpty()) {
-			User user = new User("Rix", "Ziks", "nomonom@nom.com", "test", null, null);
-			userRepository.save(user);
-		}
+	@Autowired
+	ActuatorRepository actuatorRepository;
+
+	@Autowired
+	SensorRepository sensorRepository;
+
+	@Autowired
+	RuleRepository ruleRepository;
+
+	@Autowired
+	ActionRepository actionRepository;
+
+	public static void main(String[] args) {
+	SpringApplication.run(HomeAutomationApplication.class, args);
 
 	}
 

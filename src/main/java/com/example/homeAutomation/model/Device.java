@@ -1,5 +1,7 @@
 package com.example.homeAutomation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,7 +12,7 @@ import java.util.Set;
 public class Device {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
@@ -18,6 +20,7 @@ public class Device {
     private List<Sensor> sensors = new ArrayList<>();
     @OneToMany(mappedBy = "device")
     private List<Actuator> actuators = new ArrayList<>();
+
     @ManyToMany
     private List<User> users = new ArrayList<>();
     private Long versionTimestamp;
@@ -75,6 +78,18 @@ public class Device {
     }
 
     public void setVersionTimestamp(Long versionTimestamp) {
+        this.versionTimestamp = versionTimestamp;
+    }
+
+    public Device() {
+    }
+
+    public Device(String name, String description, List<Sensor> sensors, List<Actuator> actuators, List<User> users, Long versionTimestamp) {
+        this.name = name;
+        this.description = description;
+        this.sensors = sensors;
+        this.actuators = actuators;
+        this.users = users;
         this.versionTimestamp = versionTimestamp;
     }
 }

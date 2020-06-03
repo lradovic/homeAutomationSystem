@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ActuatorRepository extends JpaRepository<Actuator,Long> {
+    Actuator findByReference(String reference);
 
 }
 

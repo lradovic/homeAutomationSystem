@@ -10,7 +10,7 @@ import java.util.Set;
 public class Sensor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String reference;
     private String value;
@@ -18,7 +18,7 @@ public class Sensor {
     private Date timestamp;
     @ManyToOne
     private Device device;
-    @ManyToMany(mappedBy = "sensors")
+    @ManyToMany(mappedBy = "sensors", fetch = FetchType.EAGER)
     private List<Rule> rules = new ArrayList<>();
 
     public List<Rule> getRules() {
