@@ -41,9 +41,9 @@ class DeviceController {
         deviceService.create(data);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") Long id, @RequestBody Device data) {
+    public void update(@PathVariable("id") Long id, @RequestBody DeviceDto data) {
         deviceService.update(id, data);
     }
 

@@ -61,12 +61,17 @@ public class DeviceService {
         deviceRepository.saveAndFlush(device);
     }
 
-    public void update(long id, Device data) {
+    public void update(long id, DeviceDto data) {
         final Device device = deviceRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
         device.setName(data.getName());
+        device.setDescription(data.getDescription());
+        device.setVersionTimestamp(data.getVersionTimestamp());
 
-        deviceRepository.save(device);
+        User user = userRepository.findById(data.getUserId()).get();
+        user.getDevices().add(device);
+        device.getUsers().add(user);
+        deviceRepository.saveAndFlush(device);
     }
 
     public void delete(long id) {
