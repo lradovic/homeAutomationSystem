@@ -31,24 +31,9 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public boolean login(LoginDto data) {
-
-        System.out.println("logindto " + data);
-
-        User user = userRepository.findByEmail(data.getEmail());
-        System.out.println("user " + user);
-
-
-        if(user==null) return false;
-        else {
-            if(user.getPassword().equals(data.getPassword()))
-            {
-                return true;
-            }
-            else
-                return false;
-        }
-
+    public Long login(LoginDto data) {
+        User user = userRepository.findByEmailAndPassword(data.getEmail(), data.getPassword());
+        return user.getId();
     }
 
     public boolean register(UserDto data) {

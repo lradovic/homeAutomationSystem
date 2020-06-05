@@ -45,7 +45,7 @@ public class DeviceService {
         return deviceRepository.findById(id);
     }
 
-    public void create(DeviceDto data) {
+    public Long create(DeviceDto data) {
 
         Device device = new Device();
         device.setId(data.getId());
@@ -58,7 +58,8 @@ public class DeviceService {
         device.getUsers().add(user);
 
 
-        deviceRepository.saveAndFlush(device);
+        Long id = deviceRepository.saveAndFlush(device).getId();
+        return id;
     }
 
     public void update(long id, DeviceDto data) {

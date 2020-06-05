@@ -26,7 +26,8 @@ class DeviceController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Device> readAll() {
-        return deviceService.readAll();
+        List<Device> devices = deviceService.readAll();
+        return devices;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -37,8 +38,9 @@ class DeviceController {
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void create(DeviceDto data) {
-        deviceService.create(data);
+    @ResponseBody
+    public Long create(DeviceDto data) {
+        return deviceService.create(data);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)

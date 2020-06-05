@@ -17,11 +17,14 @@ public class Device {
     private String name;
     private String description;
     @OneToMany(mappedBy = "device")
+    @JsonIgnore
     private List<Sensor> sensors = new ArrayList<>();
     @OneToMany(mappedBy = "device")
+    @JsonIgnore
     private List<Actuator> actuators = new ArrayList<>();
 
     @ManyToMany
+    @JsonIgnore
     private List<User> users = new ArrayList<>();
     private Long versionTimestamp;
 

@@ -21,6 +21,16 @@ public class Actuator {
     @OneToMany(mappedBy = "actuator")
     private List<Action> actions  = new ArrayList<>();
 
+    private Long versionTimestamp;
+
+    public Long getVersionTimestamp() {
+        return versionTimestamp;
+    }
+
+    public void setVersionTimestamp(Long versionTimestamp) {
+        this.versionTimestamp = versionTimestamp;
+    }
+
     public List<Rule> getRules() {
         return rules;
     }

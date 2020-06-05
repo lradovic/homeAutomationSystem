@@ -1,5 +1,7 @@
 package com.example.homeAutomation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +19,22 @@ public class User {
     private String password;
 
     @ManyToMany(mappedBy = "users")
+    @JsonIgnore
     private List<Device> devices = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Rule> rules = new ArrayList<>();
+
+    private Long versionTimestamp;
+
+    public Long getVersionTimestamp() {
+        return versionTimestamp;
+    }
+
+    public void setVersionTimestamp(Long versionTimestamp) {
+        this.versionTimestamp = versionTimestamp;
+    }
 
     public Long getId() {
         return id;

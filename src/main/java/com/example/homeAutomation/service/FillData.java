@@ -39,6 +39,7 @@ public class FillData {
             user.setLastName("Ziks");
             user.setEmail("a@a");
             user.setPassword("test");
+            user.setVersionTimestamp(System.currentTimeMillis());
             userRepository.saveAndFlush(user);
         }
 
@@ -48,6 +49,7 @@ public class FillData {
             actuator.setReference("Act 1");
             actuator.setDescription("Opis aktuatora 1");
             actuator.setValue("5564");
+            actuator.setVersionTimestamp(System.currentTimeMillis());
             actuatorRepository.saveAndFlush(actuator);
         }
 
@@ -56,6 +58,7 @@ public class FillData {
             sensor.setReference("Sensor 1");
             sensor.setDescription("Opis senzora 1");
             sensor.setValue("65C");
+            sensor.setVersionTimestamp(System.currentTimeMillis());
             sensorRepository.saveAndFlush(sensor);
         }
 
@@ -76,7 +79,7 @@ public class FillData {
             device.getUsers().add(user);
             user.getDevices().add(device);
 
-
+            device.setVersionTimestamp(System.currentTimeMillis());
             deviceRepository.saveAndFlush(device);
         }
 

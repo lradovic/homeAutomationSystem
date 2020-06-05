@@ -1,5 +1,7 @@
 package com.example.homeAutomation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +19,21 @@ public class Sensor {
     private String description;
     private Date timestamp;
     @ManyToOne
+    @JsonIgnore
     private Device device;
     @ManyToMany(mappedBy = "sensors", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Rule> rules = new ArrayList<>();
+
+    private Long versionTimestamp;
+
+    public Long getVersionTimestamp() {
+        return versionTimestamp;
+    }
+
+    public void setVersionTimestamp(Long versionTimestamp) {
+        this.versionTimestamp = versionTimestamp;
+    }
 
     public List<Rule> getRules() {
         return rules;

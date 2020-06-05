@@ -28,16 +28,14 @@ public class UserController {
     }
 
     @PostMapping(value = "/login",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<Void> create(LoginDto data) {
-        boolean b = userService.login(data);
+    public ResponseEntity<Long> create(LoginDto data) {
 
-        if(b)
-        {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }else
-        {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Long userId = userService.login(data);
+        if(userId != null) {
+            return new ResponseEntity<>(userId, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
     }
 
     @PostMapping(value = "/register",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
