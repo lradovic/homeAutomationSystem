@@ -30,6 +30,13 @@ class DeviceController {
         return devices;
     }
 
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Device> getAllByUserId(@PathVariable Long id) {
+        List<Device> devices = deviceService.getAllByUserId(id);
+        return devices;
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Device read(@PathVariable("id") long id) {

@@ -33,7 +33,10 @@ public class UserService {
 
     public Long login(LoginDto data) {
         User user = userRepository.findByEmailAndPassword(data.getEmail(), data.getPassword());
-        return user.getId();
+        if(user != null) {
+            return user.getId();
+        }
+        return null;
     }
 
     public boolean register(UserDto data) {

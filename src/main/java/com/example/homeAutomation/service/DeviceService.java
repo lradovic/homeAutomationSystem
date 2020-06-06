@@ -41,6 +41,11 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
+    public List<Device> getAllByUserId(Long id) {
+        User user = userRepository.findById(id).get();
+        return user.getDevices();
+    }
+
     public Optional<Device> read(long id) {
         return deviceRepository.findById(id);
     }

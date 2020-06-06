@@ -78,9 +78,17 @@ public class FillData {
             actuator.setDevice(device);
             device.getUsers().add(user);
             user.getDevices().add(device);
-
-            device.setVersionTimestamp(System.currentTimeMillis());
+            device.setVersionTimestamp(1592532270580L);
             deviceRepository.saveAndFlush(device);
+
+            Device device1 = new Device();
+            device1.setName("Radijator x5");
+            device1.setDescription("Opis 44");
+            device1.getUsers().add(user);
+            user.getDevices().add(device1);
+
+            device1.setVersionTimestamp(1592432270580L);
+            deviceRepository.saveAndFlush(device1);
         }
 
     }
