@@ -2,10 +2,8 @@ package com.example.homeAutomation.service;
 
 import com.example.homeAutomation.model.Device;
 import com.example.homeAutomation.model.Rule;
-import com.example.homeAutomation.repository.ActuatorRepository;
-import com.example.homeAutomation.repository.DeviceRepository;
-import com.example.homeAutomation.repository.RuleRepository;
-import com.example.homeAutomation.repository.SensorRepository;
+import com.example.homeAutomation.model.User;
+import com.example.homeAutomation.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +19,17 @@ public class RuleService {
 
     private final ActuatorRepository actuatorRepository;
 
+    private final UserRepository userRepository;
+
+
     @Autowired
     public RuleService(RuleRepository ruleRepository,
                          SensorRepository sensorRepository,
-                         ActuatorRepository actuatorRepository) {
+                         ActuatorRepository actuatorRepository, UserRepository userRepository) {
         this.ruleRepository = ruleRepository;
         this.sensorRepository = sensorRepository;
         this.actuatorRepository = actuatorRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Rule> readAll() {
@@ -57,6 +59,11 @@ public class RuleService {
         final Rule rule = ruleRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
         ruleRepository.delete(rule);
+    }
+
+    public List<Rule> getAllByUserId(Long id) {
+        User user = userRepository.findById(id).get();
+        return user.getRules();
     }
 
 
