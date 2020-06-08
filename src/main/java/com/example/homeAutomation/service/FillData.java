@@ -58,7 +58,7 @@ public class FillData {
             sensor.setReference("Sensor 1");
             sensor.setDescription("Opis senzora 1");
             sensor.setValue("65C");
-            sensor.setVersionTimestamp(System.currentTimeMillis());
+            sensor.setTimestamp(System.currentTimeMillis());
             sensorRepository.saveAndFlush(sensor);
         }
 

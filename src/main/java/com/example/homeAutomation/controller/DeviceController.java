@@ -33,8 +33,7 @@ class DeviceController {
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<Device> getAllByUserId(@PathVariable Long id) {
-        List<Device> devices = deviceService.getAllByUserId(id);
-        return devices;
+        return deviceService.getAllByUserId(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -52,7 +51,7 @@ class DeviceController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") Long id, @RequestBody DeviceDto data) {
+    public void update(@PathVariable Long id, DeviceDto data) {
         deviceService.update(id, data);
     }
 

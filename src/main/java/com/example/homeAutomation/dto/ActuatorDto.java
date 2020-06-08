@@ -12,16 +12,26 @@ public class ActuatorDto implements Serializable {
     private String value;
     private String description;
     private Long deviceId;
+    private Long versionTimestamp;
 
-    public ActuatorDto(Long id, String reference, String value, String description, Long deviceId) {
+    public ActuatorDto(Long id, String reference, String value, String description, Long deviceId, Long versionTimestamp) {
         this.id = id;
         this.reference = reference;
         this.value = value;
         this.description = description;
         this.deviceId = deviceId;
+        this.versionTimestamp = versionTimestamp;
     }
 
     public ActuatorDto() {
+    }
+
+    public Long getVersionTimestamp() {
+        return versionTimestamp;
+    }
+
+    public void setVersionTimestamp(Long versionTimestamp) {
+        this.versionTimestamp = versionTimestamp;
     }
 
     public Long getId() {

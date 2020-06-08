@@ -17,7 +17,7 @@ public class Sensor {
     private String reference;
     private String value;
     private String description;
-    private Date timestamp;
+    private Long timestamp;
     @ManyToOne
     @JsonIgnore
     private Device device;
@@ -25,14 +25,8 @@ public class Sensor {
     @JsonIgnore
     private List<Rule> rules = new ArrayList<>();
 
-    private Long versionTimestamp;
-
-    public Long getVersionTimestamp() {
-        return versionTimestamp;
-    }
-
-    public void setVersionTimestamp(Long versionTimestamp) {
-        this.versionTimestamp = versionTimestamp;
+    public Long getTimestamp() {
+        return timestamp;
     }
 
     public List<Rule> getRules() {
@@ -75,11 +69,7 @@ public class Sensor {
         this.description = description;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 

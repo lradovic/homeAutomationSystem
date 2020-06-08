@@ -9,6 +9,7 @@ import com.example.homeAutomation.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,11 @@ public class ActuatorService {
         this.deviceRepository = deviceRepository;
     }
 
+    public List<Actuator> getAllByDeviceId(Long id) {
+        Device device = deviceRepository.findById(id).get();
+        return device.getActuators();
+    }
+
     public List<Actuator> readAll() {
         return actuatorRepository.findAll();
     }
@@ -33,17 +39,19 @@ public class ActuatorService {
         return actuatorRepository.findById(id);
     }
 
-    public void create(ActuatorDto data) {
+    public Long create(ActuatorDto data) {
         Actuator actuator = new Actuator();
 
         actuator.setReference(data.getReference());
         actuator.setDescription(data.getDescription());
+        actuator.setValue(data.getValue()); //TODO samo za testiranje
+        actuator.setVersionTimestamp(data.getVersionTimestamp());
         Device device = deviceRepository.findById(data.getDeviceId()).get();
 
         actuator.setDevice(device);
         actuator.setValue(data.getValue());
 
-        actuatorRepository.save(actuator);
+        return actuatorRepository.saveAndFlush(actuator).getId();
     }
 
     public void update(long id, ActuatorDto data) {
@@ -55,7 +63,6 @@ public class ActuatorService {
         Device device = deviceRepository.findById(data.getDeviceId()).get();
 
         actuator.setDevice(device);
-
 
         actuator.setValue(data.getValue());
 

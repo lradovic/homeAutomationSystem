@@ -1,6 +1,7 @@
 package com.example.homeAutomation.controller;
 
 import com.example.homeAutomation.dto.SensorDto;
+import com.example.homeAutomation.model.Actuator;
 import com.example.homeAutomation.model.Device;
 import com.example.homeAutomation.model.Sensor;
 import com.example.homeAutomation.service.DeviceService;
@@ -24,6 +25,12 @@ class SensorController {
     @Autowired
     private DeviceService deviceService;
 
+    @GetMapping(value = "/devices/{id}")
+    @ResponseBody
+    public List<Sensor> getSensorsByDeviceId(@PathVariable Long id) {
+        return sensorService.getAllByDeviceId(id);
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Sensor> readAll() {
@@ -39,13 +46,13 @@ class SensorController {
     @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public void create(@RequestBody SensorDto data) {
-        sensorService.create(data);
+    public Long create(SensorDto data) {
+        return sensorService.create(data);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable( "id" ) Long id, @RequestBody SensorDto data) {
+    public void update(@PathVariable Long id, SensorDto data) {
         sensorService.update(id,data);
     }
 

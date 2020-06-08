@@ -33,20 +33,15 @@ public class SensorService {
         return sensorRepository.findById(id);
     }
 
-    public void create(SensorDto data) {
-
+    public Long create(SensorDto data) {
         Sensor sensor = new Sensor();
-
         sensor.setDescription(data.getDescription());
         Device device = deviceRepository.findById(data.getDeviceId()).get();
         sensor.setDevice(device);
         sensor.setReference(data.getReference());
-        Date d =  new Date(data.getTimestamp());
-        sensor.setTimestamp(d);
+        sensor.setTimestamp(data.getTimestamp());
         sensor.setValue(data.getValue());
-
-
-        sensorRepository.save(sensor);
+        return sensorRepository.save(sensor).getId();
     }
 
     public void update(long id, SensorDto data) {
@@ -56,8 +51,7 @@ public class SensorService {
         Device device = deviceRepository.findById(data.getDeviceId()).get();
         sensor.setDevice(device);
         sensor.setReference(data.getReference());
-        Date d =  new Date(data.getTimestamp());
-        sensor.setTimestamp(d);
+        sensor.setTimestamp(data.getTimestamp());
         sensor.setValue(data.getValue());
 
         sensorRepository.save(sensor);
@@ -67,5 +61,10 @@ public class SensorService {
         final Sensor sensor = sensorRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
         sensorRepository.delete(sensor);
+    }
+
+    public List<Sensor> getAllByDeviceId(Long id) {
+        Device device = deviceRepository.findById(id).get();
+        return device.getSensors();
     }
 }

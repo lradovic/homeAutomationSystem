@@ -13,10 +13,19 @@ public class Action {
     private Long id;
     private String name;
     private String description;
+    private String action;
     @ManyToOne
     @JsonIgnore
     private Actuator actuator;
     private Long versionTimestamp;
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
 
     public Long getVersionTimestamp() {
         return versionTimestamp;

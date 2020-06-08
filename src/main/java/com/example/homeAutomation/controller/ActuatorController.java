@@ -7,6 +7,7 @@ import com.example.homeAutomation.service.ActuatorService;
 import com.example.homeAutomation.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,12 @@ class ActuatorController {
         this.deviceService = deviceService;
     }
 
+    @GetMapping(value = "/devices/{id}")
+    @ResponseBody
+    public List<Actuator> getActuatorsByDeviceId(@PathVariable Long id) {
+        return actuatorService.getAllByDeviceId(id);
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Actuator> readAll() {
@@ -39,16 +46,16 @@ class ActuatorController {
         return actuatorService.read(id).orElseThrow(IllegalArgumentException::new);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public void create(@RequestBody ActuatorDto data) {
-        actuatorService.create(data);
+    public Long create( ActuatorDto data) {
+        return actuatorService.create(data);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable( "id" ) Long id, @RequestBody ActuatorDto data) {
+    public void update(@PathVariable Long id, ActuatorDto data) {
         actuatorService.update(id, data);
     }
 

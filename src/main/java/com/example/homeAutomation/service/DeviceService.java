@@ -62,9 +62,7 @@ public class DeviceService {
         user.getDevices().add(device);
         device.getUsers().add(user);
 
-
-        Long id = deviceRepository.saveAndFlush(device).getId();
-        return id;
+        return deviceRepository.saveAndFlush(device).getId();
     }
 
     public void update(long id, DeviceDto data) {
@@ -73,10 +71,6 @@ public class DeviceService {
         device.setName(data.getName());
         device.setDescription(data.getDescription());
         device.setVersionTimestamp(data.getVersionTimestamp());
-
-        User user = userRepository.findById(data.getUserId()).get();
-        user.getDevices().add(device);
-        device.getUsers().add(user);
         deviceRepository.saveAndFlush(device);
     }
 
