@@ -19,7 +19,6 @@ public class Sensor {
     private String description;
     private Long timestamp;
     @ManyToOne
-    @JsonIgnore
     private Device device;
     @ManyToMany(mappedBy = "sensors", fetch = FetchType.EAGER)
     @JsonIgnore

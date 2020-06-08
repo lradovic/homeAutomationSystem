@@ -53,7 +53,6 @@ public class SensorService {
         sensor.setReference(data.getReference());
         sensor.setTimestamp(data.getTimestamp());
         sensor.setValue(data.getValue());
-
         sensorRepository.save(sensor);
     }
 
