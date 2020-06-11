@@ -1,5 +1,7 @@
 package com.example.homeAutomation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ public class Actuator {
     @ManyToMany(mappedBy = "actuators", fetch = FetchType.EAGER)
     private List<Rule> rules = new ArrayList<>();
     @OneToMany(mappedBy = "actuator")
+    @JsonIgnore
     private List<Action> actions  = new ArrayList<>();
 
     private Long versionTimestamp;

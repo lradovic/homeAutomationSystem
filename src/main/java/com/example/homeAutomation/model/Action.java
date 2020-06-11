@@ -15,7 +15,6 @@ public class Action {
     private String description;
     private String action;
     @ManyToOne
-    @JsonIgnore
     private Actuator actuator;
     private Long versionTimestamp;
 
