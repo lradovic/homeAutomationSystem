@@ -3,6 +3,7 @@ package com.example.homeAutomation.controller;
 import com.example.homeAutomation.dto.DeviceDto;
 import com.example.homeAutomation.dto.LoginDto;
 import com.example.homeAutomation.dto.UserDto;
+import com.example.homeAutomation.model.User;
 import com.example.homeAutomation.service.*;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,11 @@ public class UserController {
     }
 
     @PostMapping(value = "/login",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<Long> create(LoginDto data) {
+    public ResponseEntity<User> create(LoginDto data) {
 
-        Long userId = userService.login(data);
-        if(userId != null) {
-            return new ResponseEntity<>(userId, HttpStatus.OK);
+        User user = userService.login(data);
+        if(user.getId() != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 

@@ -31,10 +31,10 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public Long login(LoginDto data) {
+    public User login(LoginDto data) {
         User user = userRepository.findByEmailAndPassword(data.getEmail(), data.getPassword());
         if(user != null) {
-            return user.getId();
+            return user;
         }
         return null;
     }

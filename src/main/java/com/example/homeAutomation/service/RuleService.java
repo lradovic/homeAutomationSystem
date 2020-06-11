@@ -1,12 +1,13 @@
 package com.example.homeAutomation.service;
 
-import com.example.homeAutomation.model.Device;
-import com.example.homeAutomation.model.Rule;
-import com.example.homeAutomation.model.User;
+import com.example.homeAutomation.dto.RuleDto;
+import com.example.homeAutomation.dto.RuleResponseDto;
+import com.example.homeAutomation.model.*;
 import com.example.homeAutomation.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,17 +41,46 @@ public class RuleService {
         return ruleRepository.findById(id);
     }
 
-    public void create(Rule data) {
-        ruleRepository.save(data);
+    public Long create(RuleDto data) {
+        Rule rule = new Rule();
+
+        rule.setDescription(data.getDescription());
+        rule.setName(data.getName());
+        User user = userRepository.findById(data.getUserId()).get();
+        rule.setUser(user);
+        rule.setVersionTimestamp(data.getVersionTimestamp());
+        Sensor sensor = sensorRepository.findById(data.getSensorId()).get();
+        List<Sensor> sensors = new ArrayList<>();
+        sensors.add(sensor);
+        rule.setSensors(sensors);
+
+        Actuator actuator = actuatorRepository.findById(data.getActuatorId()).get();
+        List<Actuator> actuators = new ArrayList<>();
+        actuators.add(actuator);
+        rule.setActuators(actuators);
+
+
+       return ruleRepository.save(rule).getId();
     }
 
-    public void update(long id, Rule data) {
+    public void update(long id, RuleDto data) {
         final Rule rule = ruleRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
-        rule.setName(data.getName());
-        rule.setActuators(data.getActuators());
         rule.setDescription(data.getDescription());
-        rule.setSensors(data.getSensors());
+        rule.setName(data.getName());
+        User user = userRepository.findById(data.getUserId()).get();
+        rule.setUser(user);
+        rule.setVersionTimestamp(data.getVersionTimestamp());
+        Sensor sensor = sensorRepository.findById(data.getSensorId()).get();
+        List<Sensor> sensors = new ArrayList<>();
+        sensors.add(sensor);
+        rule.setSensors(sensors);
+
+        Actuator actuator = actuatorRepository.findById(data.getActuatorId()).get();
+        List<Actuator> actuators = new ArrayList<>();
+        actuators.add(actuator);
+        rule.setActuators(actuators);
+
 
         ruleRepository.save(rule);
     }
@@ -61,9 +91,31 @@ public class RuleService {
         ruleRepository.delete(rule);
     }
 
-    public List<Rule> getAllByUserId(Long id) {
+    public List<RuleResponseDto> getAllByUserId(Long id) {
         User user = userRepository.findById(id).get();
-        return user.getRules();
+
+        List<RuleResponseDto> ruleResponseDtos = new ArrayList<>();
+
+        List<Rule> rules = user.getRules();
+
+        for(Rule r : rules)
+        {
+            RuleResponseDto ruleResponseDto = new RuleResponseDto();
+
+            ruleResponseDto.setActuator(r.getActuators().get(0));
+            ruleResponseDto.setSensor(r.getSensors().get(0));
+            ruleResponseDto.setDescription(r.getDescription());
+            ruleResponseDto.setName(r.getName());
+            ruleResponseDto.setId(r.getId());
+            ruleResponseDto.setUser(user);
+            ruleResponseDto.setVersionTimestamp(r.getVersionTimestamp());
+
+            ruleResponseDtos.add(ruleResponseDto);
+
+        }
+
+
+        return ruleResponseDtos;
     }
 
 
