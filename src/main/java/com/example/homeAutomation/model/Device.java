@@ -16,9 +16,11 @@ public class Device {
     private Long id;
     private String name;
     private String description;
+
     @OneToMany(mappedBy = "device")
     @JsonIgnore
     private List<Sensor> sensors = new ArrayList<>();
+
     @OneToMany(mappedBy = "device")
     @JsonIgnore
     private List<Actuator> actuators = new ArrayList<>();

@@ -41,6 +41,14 @@ public class FillData {
             user.setPassword("test");
             user.setVersionTimestamp(System.currentTimeMillis());
             userRepository.saveAndFlush(user);
+
+            User user1 = new User();
+            user1.setFirstName("Kk");
+            user1.setLastName("jklsdfjklfsd");
+            user1.setEmail("b@b");
+            user1.setPassword("test");
+            user1.setVersionTimestamp(System.currentTimeMillis());
+            userRepository.saveAndFlush(user1);
         }
 
 

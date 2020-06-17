@@ -1,6 +1,7 @@
 package com.example.homeAutomation.service;
 
 import com.example.homeAutomation.dto.DeviceDto;
+import com.example.homeAutomation.dto.ShareDeviceDto;
 import com.example.homeAutomation.model.Device;
 import com.example.homeAutomation.model.User;
 import com.example.homeAutomation.repository.ActuatorRepository;
@@ -78,6 +79,15 @@ public class DeviceService {
         final Device device = deviceRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
         deviceRepository.delete(device);
+    }
+
+    public void shareDevice(ShareDeviceDto shareDeviceDto) {
+        User user = userRepository.findByEmail(shareDeviceDto.getUserEmail());
+        Device device = deviceRepository.findById(shareDeviceDto.getDeviceId()).get();
+
+        user.getDevices().add(device);
+        device.getUsers().add(user);
+        deviceRepository.saveAndFlush(device);
     }
 
    /* private void generateSensorData(Sensor sensor) {

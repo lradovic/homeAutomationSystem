@@ -1,6 +1,7 @@
 package com.example.homeAutomation.controller;
 
 import com.example.homeAutomation.dto.DeviceDto;
+import com.example.homeAutomation.dto.ShareDeviceDto;
 import com.example.homeAutomation.model.Device;
 import com.example.homeAutomation.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,12 @@ class DeviceController {
     @RequestMapping(value = "/{id}/sync", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void sync(@PathVariable("id") Long id) {
+    }
+
+    @PostMapping(value = "/shared", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void shareDevice(ShareDeviceDto shareDeviceDto) {
+        deviceService.shareDevice(shareDeviceDto);
     }
 
 }
