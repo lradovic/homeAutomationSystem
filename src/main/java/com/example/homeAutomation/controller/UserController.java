@@ -1,20 +1,15 @@
 package com.example.homeAutomation.controller;
 
-import com.example.homeAutomation.dto.DeviceDto;
 import com.example.homeAutomation.dto.LoginDto;
 import com.example.homeAutomation.dto.UserDto;
 import com.example.homeAutomation.model.User;
-import com.example.homeAutomation.service.*;
-import org.apache.coyote.Response;
+import com.example.homeAutomation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin
@@ -50,5 +45,11 @@ public class UserController {
         {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser(UserDto userDto) {
+        userService.updateUser(userDto);
     }
 }

@@ -73,4 +73,12 @@ public class UserService {
 
         userRepository.delete(sensor);
     }
+
+    public void updateUser(UserDto userDto) {
+        User user = userRepository.findById(userDto.getId()).get();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setVersionTimestamp(System.currentTimeMillis());
+        userRepository.saveAndFlush(user);
+    }
 }
