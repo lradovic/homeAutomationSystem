@@ -87,15 +87,16 @@ public class SensorService {
             sensorRepository.save(s);
 
             //provera pravila
+        }
 
-            List<Rule> rules = ruleRepository.findAll();
+        List<Rule> rules = ruleRepository.findAll();
 
-            for(Rule r: rules)
-            {
-                int v = Integer.parseInt(r.getSensors().get(0).getValue());
+        for(Rule r: rules)
+        {
+            int v = Integer.parseInt(r.getSensors().get(0).getValue());
+            //parse description
+            //if(ruleValue?v) do
 
-                //if(num)
-            }
         }
     }
 }
