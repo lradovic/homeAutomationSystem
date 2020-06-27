@@ -74,6 +74,6 @@ public class RuleController {
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
 
-        sensorService.delete(id);
+        ruleService.delete(id);
     }
 }
