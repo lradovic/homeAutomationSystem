@@ -11,19 +11,49 @@ public class RuleResponseDto implements Serializable {
     private Long id;
     private String name;
     private String description;
+    private String value;
+    private String ruleRelation;
+    private String valueActuator;
     private Long versionTimestamp;
     private User user;
     private Actuator actuator;
     private Sensor sensor;
 
-    public RuleResponseDto(Long id, String name, String description, Long versionTimestamp, User user, Actuator actuator, Sensor sensor) {
+    public RuleResponseDto(Long id, String name, String description, String value, String ruleRelation, String valueActuator, Long versionTimestamp, User user, Actuator actuator, Sensor sensor) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.value = value;
+        this.ruleRelation = ruleRelation;
+        this.valueActuator = valueActuator;
         this.versionTimestamp = versionTimestamp;
         this.user = user;
         this.actuator = actuator;
         this.sensor = sensor;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getRuleRelation() {
+        return ruleRelation;
+    }
+
+    public void setRuleRelation(String ruleRelation) {
+        this.ruleRelation = ruleRelation;
+    }
+
+    public String getValueActuator() {
+        return valueActuator;
+    }
+
+    public void setValueActuator(String valueActuator) {
+        this.valueActuator = valueActuator;
     }
 
     public RuleResponseDto() {

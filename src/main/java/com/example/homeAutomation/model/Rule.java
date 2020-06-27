@@ -16,6 +16,9 @@ public class Rule {
     private Long id;
     private String name;
     private String description;
+    private String value;
+    private String ruleRelation;
+    private String valueActuator;
     @ManyToMany
     @JsonIgnore
     private List<Sensor> sensors = new ArrayList<>();
@@ -83,5 +86,29 @@ public class Rule {
 
     public void setActuators(List<Actuator> actuators) {
         this.actuators = actuators;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getRuleRelation() {
+        return ruleRelation;
+    }
+
+    public void setRuleRelation(String ruleRelation) {
+        this.ruleRelation = ruleRelation;
+    }
+
+    public String getValueActuator() {
+        return valueActuator;
+    }
+
+    public void setValueActuator(String valueActuator) {
+        this.valueActuator = valueActuator;
     }
 }

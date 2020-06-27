@@ -1,9 +1,11 @@
 package com.example.homeAutomation.service;
 
 import com.example.homeAutomation.dto.SensorDto;
+import com.example.homeAutomation.model.Actuator;
 import com.example.homeAutomation.model.Device;
 import com.example.homeAutomation.model.Rule;
 import com.example.homeAutomation.model.Sensor;
+import com.example.homeAutomation.repository.ActuatorRepository;
 import com.example.homeAutomation.repository.DeviceRepository;
 import com.example.homeAutomation.repository.RuleRepository;
 import com.example.homeAutomation.repository.SensorRepository;
@@ -19,16 +21,19 @@ import java.util.Random;
 public class SensorService {
 
     private final SensorRepository sensorRepository;
+    private final ActuatorRepository actuatorRepository;
+
     private final DeviceRepository deviceRepository;
     private final RuleRepository ruleRepository;
 
 
 
     @Autowired
-    public SensorService(SensorRepository sensorRepository, DeviceRepository deviceRepository, RuleRepository ruleRepository) {
+    public SensorService(SensorRepository sensorRepository, DeviceRepository deviceRepository, RuleRepository ruleRepository, ActuatorRepository actuatorRepository) {
         this.sensorRepository = sensorRepository;
         this.deviceRepository = deviceRepository;
         this.ruleRepository = ruleRepository;
+        this.actuatorRepository = actuatorRepository;
     }
 
     public List<Sensor> readAll() {
@@ -94,8 +99,52 @@ public class SensorService {
         for(Rule r: rules)
         {
             int v = Integer.parseInt(r.getSensors().get(0).getValue());
-            //parse description
-            //if(ruleValue?v) do
+
+            switch (r.getRuleRelation())
+            {
+                case ">=":
+                    if(Long.parseLong(r.getValue())>=Long.parseLong(r.getSensors().get(0).getValue()))
+                    {
+                        Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
+                        actuator.get().setValue(r.getValueActuator());
+                        actuatorRepository.save(actuator.get());
+                        //r.getActuators().get(0).setValue(r.getValueActuator());
+
+                    }
+                    break;
+                case ">":
+                    if(Long.parseLong(r.getValue())>Long.parseLong(r.getSensors().get(0).getValue()))
+                    {
+                        Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
+                        actuator.get().setValue(r.getValueActuator());
+                        actuatorRepository.save(actuator.get());
+                    }
+                    break;
+                case "=":
+                    if(Long.parseLong(r.getValue())==Long.parseLong(r.getSensors().get(0).getValue()))
+                    {
+                        Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
+                        actuator.get().setValue(r.getValueActuator());
+                        actuatorRepository.save(actuator.get());
+                    }
+                    break;
+                case "<=":
+                    if(Long.parseLong(r.getValue())<=Long.parseLong(r.getSensors().get(0).getValue()))
+                    {
+                        Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
+                        actuator.get().setValue(r.getValueActuator());
+                        actuatorRepository.save(actuator.get());
+                    }
+                    break;
+                case "<":
+                    if(Long.parseLong(r.getValue())<Long.parseLong(r.getSensors().get(0).getValue()))
+                    {
+                        Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
+                        actuator.get().setValue(r.getValueActuator());
+                        actuatorRepository.save(actuator.get());
+                    }
+                    break;
+            }
 
         }
     }

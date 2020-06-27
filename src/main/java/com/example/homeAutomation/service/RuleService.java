@@ -46,6 +46,9 @@ public class RuleService {
 
         rule.setDescription(data.getDescription());
         rule.setName(data.getName());
+        rule.setValue(data.getValue());
+        rule.setValueActuator(data.getValueActuator());
+        rule.setRuleRelation(data.getRuleRelation());
         User user = userRepository.findById(data.getUserId()).get();
         rule.setUser(user);
         rule.setVersionTimestamp(data.getVersionTimestamp());
@@ -68,6 +71,9 @@ public class RuleService {
 
         rule.setDescription(data.getDescription());
         rule.setName(data.getName());
+        rule.setValue(data.getValue());
+        rule.setValueActuator(data.getValueActuator());
+        rule.setRuleRelation(data.getRuleRelation());
         User user = userRepository.findById(data.getUserId()).get();
         rule.setUser(user);
         rule.setVersionTimestamp(data.getVersionTimestamp());
@@ -109,6 +115,9 @@ public class RuleService {
             ruleResponseDto.setId(r.getId());
             ruleResponseDto.setUser(user);
             ruleResponseDto.setVersionTimestamp(r.getVersionTimestamp());
+            ruleResponseDto.setValue(r.getValue());
+            ruleResponseDto.setValueActuator(r.getValueActuator());
+            ruleResponseDto.setRuleRelation(r.getRuleRelation());
 
             ruleResponseDtos.add(ruleResponseDto);
 
