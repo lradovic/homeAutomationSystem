@@ -103,7 +103,7 @@ public class SensorService {
             switch (r.getRuleRelation())
             {
                 case ">=":
-                    if(Long.parseLong(r.getValue())>=Long.parseLong(r.getSensors().get(0).getValue()))
+                    if(Long.parseLong(r.getSensors().get(0).getValue())>=Long.parseLong(r.getValue()))
                     {
                         Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
                         actuator.get().setValue(r.getValueActuator());
@@ -113,7 +113,7 @@ public class SensorService {
                     }
                     break;
                 case ">":
-                    if(Long.parseLong(r.getValue())>Long.parseLong(r.getSensors().get(0).getValue()))
+                    if(Long.parseLong(r.getSensors().get(0).getValue())>Long.parseLong(r.getValue()))
                     {
                         Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
                         actuator.get().setValue(r.getValueActuator());
@@ -121,7 +121,7 @@ public class SensorService {
                     }
                     break;
                 case "=":
-                    if(Long.parseLong(r.getValue())==Long.parseLong(r.getSensors().get(0).getValue()))
+                    if(Long.parseLong(r.getSensors().get(0).getValue())==Long.parseLong(r.getValue()))
                     {
                         Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
                         actuator.get().setValue(r.getValueActuator());
@@ -129,7 +129,7 @@ public class SensorService {
                     }
                     break;
                 case "<=":
-                    if(Long.parseLong(r.getValue())<=Long.parseLong(r.getSensors().get(0).getValue()))
+                    if(Long.parseLong(r.getSensors().get(0).getValue())<=Long.parseLong(r.getValue()))
                     {
                         Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
                         actuator.get().setValue(r.getValueActuator());
@@ -137,7 +137,7 @@ public class SensorService {
                     }
                     break;
                 case "<":
-                    if(Long.parseLong(r.getValue())<Long.parseLong(r.getSensors().get(0).getValue()))
+                    if(Long.parseLong(r.getSensors().get(0).getValue())<Long.parseLong(r.getValue()))
                     {
                         Optional<Actuator> actuator = actuatorRepository.findById(r.getActuators().get(0).getId());
                         actuator.get().setValue(r.getValueActuator());

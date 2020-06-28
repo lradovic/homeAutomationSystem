@@ -62,4 +62,10 @@ class SensorController {
 
         sensorService.delete(id);
     }
+
+    @RequestMapping(value = "/generate",method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public void generate() {
+        sensorService.generateData();
+    }
 }
