@@ -56,7 +56,7 @@ public class FillData {
             Actuator actuator = new Actuator();
             actuator.setReference("Act 1");
             actuator.setDescription("Opis aktuatora 1");
-            actuator.setValue("5564");
+            actuator.setValue("OFF");
             actuator.setVersionTimestamp(System.currentTimeMillis());
             actuatorRepository.saveAndFlush(actuator);
         }
