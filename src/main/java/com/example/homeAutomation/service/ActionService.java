@@ -48,7 +48,7 @@ public class ActionService {
         action.setName(actionDto.getName());
         action.setDescription(actionDto.getDescription());
         action.setVersionTimestamp(actionDto.getVersionTimestamp());
-        action.setAction(actionDto.getAction());
+        //action.setAction(actionDto.getAction());
 
         Actuator actuator = actuatorRepository.findById(actionDto.getActuatorId()).get();
         action.setActuator(actuator);

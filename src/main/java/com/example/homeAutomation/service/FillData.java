@@ -1,9 +1,6 @@
 package com.example.homeAutomation.service;
 
-import com.example.homeAutomation.model.Actuator;
-import com.example.homeAutomation.model.Device;
-import com.example.homeAutomation.model.Sensor;
-import com.example.homeAutomation.model.User;
+import com.example.homeAutomation.model.*;
 import com.example.homeAutomation.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,21 +48,35 @@ public class FillData {
             userRepository.saveAndFlush(user1);
         }
 
+        if(actionRepository.findAll().isEmpty()) {
+            Action action = new Action();
+            action.setName("Action eins");
+            action.setAction("OFF");
+            action.setVersionTimestamp(System.currentTimeMillis());
+            action.setDescription("Blabla");
+            actionRepository.saveAndFlush(action);
+        }
+
 
         if(actuatorRepository.findAll().isEmpty()) {
+            Action action = actionRepository.findById(1L).get();
             Actuator actuator = new Actuator();
             actuator.setReference("Act 1");
             actuator.setDescription("Opis aktuatora 1");
             actuator.setValue("OFF");
             actuator.setVersionTimestamp(System.currentTimeMillis());
+            actuator.getActions().add(action);
+            action.setActuator(actuator);
             actuatorRepository.saveAndFlush(actuator);
         }
+
+
 
         if(sensorRepository.findAll().isEmpty()) {
             Sensor sensor = new Sensor();
             sensor.setReference("Sensor 1");
             sensor.setDescription("Opis senzora 1");
-            sensor.setValue("65C");
+            sensor.setValue("65");
             sensor.setTimestamp(System.currentTimeMillis());
             sensorRepository.saveAndFlush(sensor);
         }
