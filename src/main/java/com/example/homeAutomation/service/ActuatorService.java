@@ -74,4 +74,19 @@ public class ActuatorService {
 
         actuatorRepository.delete(actuator);
     }
+
+    public void shake(Long id)
+    {
+        Actuator actuator = actuatorRepository.getOne(id);
+
+        if(actuator.getValue()=="ON")
+        {
+            actuator.setValue("OFF");
+            actuatorRepository.save(actuator);
+        }else {
+            actuator.setValue("ON");
+            actuatorRepository.save(actuator);
+        }
+
+    }
 }

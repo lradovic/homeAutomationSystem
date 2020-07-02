@@ -64,4 +64,10 @@ class ActuatorController {
     public void delete(@PathVariable("id") Long id) {
         actuatorService.delete(id);
     }
+
+    @RequestMapping(value = "/shake/{id}",method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public void generate(@PathVariable("id") Long id) {
+        actuatorService.shake(id);
+    }
 }
