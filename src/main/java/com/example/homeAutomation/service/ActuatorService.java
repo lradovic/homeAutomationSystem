@@ -44,7 +44,7 @@ public class ActuatorService {
 
         actuator.setReference(data.getReference());
         actuator.setDescription(data.getDescription());
-        actuator.setValue(data.getValue()); //TODO samo za testiranje
+        actuator.setValue(data.getValue()); // za testiranje
         actuator.setVersionTimestamp(data.getVersionTimestamp());
         Device device = deviceRepository.findById(data.getDeviceId()).get();
 
@@ -75,18 +75,17 @@ public class ActuatorService {
         actuatorRepository.delete(actuator);
     }
 
-    public void shake(Long id)
+    public Actuator shake(Long id)
     {
-        Actuator actuator = actuatorRepository.getOne(id);
+        Actuator actuator = actuatorRepository.findById(id).get();
 
-        if(actuator.getValue()=="ON")
-        {
+        if(actuator.getValue().equals("ON")) {
             actuator.setValue("OFF");
-            actuatorRepository.save(actuator);
-        }else {
+        } else {
             actuator.setValue("ON");
-            actuatorRepository.save(actuator);
         }
+        actuator.setVersionTimestamp(System.currentTimeMillis());
+        return actuatorRepository.save(actuator);
 
     }
 }
